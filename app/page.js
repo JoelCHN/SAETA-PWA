@@ -1,52 +1,45 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] bg-blue-400 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col bg-white border-solid-black rounded gap-8 row-start-2 items-center sm:items-start shadow p-4 ">
+    <div className="grid grid-rows-[20px_1fr_20px] bg-gray-100 items-center justify-items-center min-h-screen p-8 pb-10 gap-8 sm:p-1 font-sans">
+      <main className="flex flex-col bg-[#3A9EC2] text-white border border-gray-300 rounded-xl gap-6 row-start-2 items-center shadow-xl p-6 sm:max-w-md sm:w-full">
+        
+        <h1 className="text-center text-white text-2xl font-bold pt-4 mb-6">
+          Inicio de sesión
+        </h1>
+
         <Image
-          className="center mn-2 px-4"
+          className="justify-center"
           src="/icon512_rounded.png"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          alt="App logo"
+          width={100}
+          height={100}
           priority
         />
-        <ol className="list-inside  text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-4 px-8 text-black ">
-           Servicios de ruteo en Villahermosa Tabasco Centro{" "}
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full mb-10 border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
+        <div className="flex flex-col gap-4 w-full pt-6 mt-6 justify-center">
+          <Link
+            href="/dashboard"
+            className="cursor-pointer rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-black text-white gap-2 hover:bg-[#6BC5E8] text-sm sm:text-base h-10 sm:h-12 px-4 hover:shadow-lg"
             rel="noopener noreferrer"
           >
-            <Image
-              className="dark:invert m-2 p-4"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
             Inicia sesión
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent mb-10 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="#"
-            target="_blank"
+          </Link>
+
+          <Link
+            href="/dashboard/register"
+            className="cursor-pointer rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-gray-300 text-black gap-2 hover:bg-gray-500 text-sm sm:text-base h-10 sm:h-12 px-4 hover:shadow-lg"
             rel="noopener noreferrer"
           >
-            regístrate ahora
-          </a>
+            Regístrate
+          </Link>
         </div>
       </main>
-      
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
 
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        {/* Aquí puedes agregar más contenido para el footer */}
       </footer>
     </div>
   );

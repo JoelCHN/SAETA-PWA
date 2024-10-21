@@ -20,8 +20,6 @@ export const metadata = {
   icons:{
     favicon: "/icon512_rounded.png",
     apple: "/icon512_maskable.png",
-
-
   },
   theme:"#6bc5e8"
 };
