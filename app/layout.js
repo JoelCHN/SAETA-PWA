@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Menu from "./components/ui/Menu";
+import AsideMenu from "./components/ui/AsideMenu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,11 +29,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <script defer src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+        <script defer src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+        <Menu/>
+        <AsideMenu/>
+        <div className="p-4 sm:ml-64">
+				  <div className="p-4 mt-14">
+            {children}
+				  </div>
+			  </div>
       </body>
     </html>
   );
