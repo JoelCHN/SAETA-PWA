@@ -1,14 +1,18 @@
 import Menu from '../../components/ui/Menu';
+import AsideMenu from '../../components/ui/AsideMenu';
 import Image from 'next/image';
 import Footer from '../../components/ui/Footer';
 import Link from 'next/link';
 
 export default function Address() {
   return (
-    <div>
-      <Menu />
-      <main className='w-full flex-col bg-[#3A9EC2] pt-20'>
-          <div className='w-full bg-white rounded-t-xl'>
+    <>
+    <Menu />
+    <AsideMenu />
+
+    <div className="p-4 sm:ml-64">
+      <div className="p-4 mt-14">
+<div className='w-full bg-white rounded-t-xl'>
 
               <div className='w-full text-sm text-center pb-4 pt-4'>
               <h1 className='text-black text-xl font-30 font-bold md:text-md'>Selecciona tu tipo de transporte</h1>
@@ -60,8 +64,9 @@ export default function Address() {
 
             </div>    
           </div>
-          <Footer/>
-      </main>
+      </div>
+      <Footer />
     </div>
+   </>
   );
 }

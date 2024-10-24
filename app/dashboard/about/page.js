@@ -1,12 +1,19 @@
 import Menu from "../../components/ui/Menu";
+import AsideMenu from "../../components/ui/AsideMenu";
+import Footer from "../../components/ui/Footer";
 
 export default function About(){
     return (
-        <div>
-            <Menu/>
-            <main>
-                <p>Acerca de</p>
-            </main>
-        </div>
+		<>
+			<Menu />
+			<AsideMenu />
+
+			<div className="p-4 sm:ml-64">
+				<div className="p-4 mt-14">
+                    <p>Acerca de</p>
+				</div>
+            	<Footer />
+			</div>
+		</>
     );
 }
