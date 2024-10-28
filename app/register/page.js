@@ -7,12 +7,9 @@ import { useState } from "react";
 export default function Register() {
 return (
 <>
-    <div
-        className="grid grid-rows-[20px_1fr_20px] bg-gray-100 items-center justify-items-center min-h-screen p-8 pb-10 gap-8 sm:p-1 font-sans">
-        <main
-            className="flex flex-col bg-[#3A9EC2] text-white border border-gray-300 rounded-xl gap-6 row-start-2 items-center shadow-xl p-6 sm:max-w-md sm:w-full">
-
-            <h1 className="text-center text-white text-2xl font-bold pt-4">
+    <div className="justify-center items-center flex flex-col">
+    <section className="flex flex-col bg-[#3A9EC2] text-white border border-gray-300 rounded-xl gap-6 row-start-2 items-center shadow-xl p-6 sm:max-w-md sm:w-full">
+    <h1 className="text-center text-white text-2xl font-bold pt-4">
                 Registro
             </h1>
 
@@ -53,11 +50,7 @@ return (
                 Inicia sesión aquí
                 </Link>
             </div>
-        </main>
-
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-
-        </footer>
+    </section>
     </div>
 </>
 );
