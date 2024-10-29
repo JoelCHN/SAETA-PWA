@@ -38,7 +38,7 @@ return (
     </section>
     <section className='flex flex-col gap-4 items-center md:flex-row'>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">ARVIT</h5>
@@ -46,7 +46,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">UTPCAM</h5>
@@ -54,7 +54,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">VICOSENTRA</h5>
@@ -62,7 +62,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">UTUCC</h5>
@@ -70,7 +70,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">SETRATAB</h5>
@@ -78,7 +78,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">GENESIS XXI</h5>
@@ -86,7 +86,7 @@ return (
             </a>
         </div>
         <div className="w-full max-w-xs bg-white border border-gray-200 hover:bg-gray-100 rounded-lg shadow">
-            <a href='#'>
+            <a href='/cities_routes/transport_union'>
             <div className="flex flex-col items-center">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
                 <h5 className="mb-1 text-xl font-medium text-gray-900">LINEA DORADA</h5>
