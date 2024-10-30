@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "./components/ui/Footer";
 
 export default function Home() {
   return (
@@ -37,9 +38,7 @@ export default function Home() {
       </p>
       
       <Image className="mt-4" src="/Banner_Bien.png" alt="App logo" width={1280} height={720} />
-      <footer className="text-center text-balance mt-4">
-        <span className="font-thin text-xs">Toda la información corresponde a la proporcionada por la ex Secretaría de Comunicaciones y Transportes, hoy Secretaría de Movilidad del Estado de Tabasco, mediante la Plataforma Nacional de Transparencia: folios <a href="https://transparencia.tabasco.gob.mx/media/estrados/2876_1.pdf" target="_blank">01661217</a> y <a href="https://transparencia.tabasco.gob.mx/media/estrados/12944_1.pdf" target="_blank">01903119</a></span>
-      </footer>
+      <Footer />
     </>
   );
 }
