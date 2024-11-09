@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Map } from "../../components/ui/Map.js";
 
 export default async function Page({ params }) {
   const id = (await params).id
@@ -95,6 +96,7 @@ export default async function Page({ params }) {
 </div>
 
       </section>
+      <Map />
     </>
   );
 }
