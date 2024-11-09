@@ -3,43 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ref, set } from "firebase/database";
-import { auth, database } from '../../firebaseConfig';
+import { useRouter } from "next/navigation";  
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 
-
-export default function Register() {
+export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
 
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-        // Obtener el UID del usuario recién registrado
-        const uid = userCredential.user.uid;
-  
-        // Guardar el nombre de usuario y otros datos en la base de datos en tiempo real
-        await set(ref(database, 'users/' + uid), {
-          username: username,
-          email: email
-        });
-  
-        router.push("/login");
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push("/");
+      // Redirigir o realizar otra acción después del inicio de sesión
     } catch (error) {
-        if (error.code === 'auth/weak-password') {
-            setError("La contraseña es demasiado débil.");
-          } else if (error.code === 'auth/email-already-in-use') {
-            setError("Este correo electrónico ya está en uso.");
-          } else {
-            setError("Error al registrarse: " + error.message);
-          }
+      setError("Error al iniciar sesión: " + error.message);
     }
   };
 
@@ -47,8 +29,8 @@ export default function Register() {
     <>
       <div className="justify-center items-center flex flex-col">
         <section className="flex flex-col bg-[#3A9EC2] border border-gray-300 rounded-xl gap-6 row-start-2 items-center shadow-xl p-6 sm:max-w-md sm:w-full">
-          <h1 className="text-center text-2xl font-bold pt-4">
-            Registrarse
+          <h1 className="text-center text-white text-2xl font-bold pt-4">
+            Iniciar Sesión
           </h1>
 
           <Image
@@ -60,23 +42,9 @@ export default function Register() {
             priority
           />
 
-          <form className="flex flex-col gap-4 w-full pt-6 justify-center" onSubmit={handleRegister}>
-          <div className="w-full">
-              <label htmlFor="username" className="block text-sm font-medium ">Nombre de Usuario</label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6BC5E8] sm:text-sm"
-                placeholder="Tu nombre de usuario"
-              />
-            </div>
-
+          <form className="flex flex-col gap-4 w-full pt-6 justify-center" onSubmit={handleLogin}>
             <div className="w-full">
-              <label htmlFor="email" className="block text-sm font-medium ">Correo electrónico</label>
+              <label htmlFor="email" className="block text-sm font-medium text-white">Correo electrónico</label>
               <input
                 type="email"
                 name="email"
@@ -90,7 +58,7 @@ export default function Register() {
             </div>
 
             <div className="w-full">
-              <label htmlFor="password" className="block text-sm font-medium ">Contraseña</label>
+              <label htmlFor="password" className="block text-sm font-medium text-white">Contraseña</label>
               <input
                 type="password"
                 name="password"
@@ -109,14 +77,14 @@ export default function Register() {
               type="submit"
               className="cursor-pointer rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-black text-white gap-2 hover:bg-[#6BC5E8] text-sm sm:text-base h-10 sm:h-12 px-4 hover:shadow-lg"
             >
-              Registrarse
+              Iniciar Sesión
             </button>
           </form>
 
           <div className="w-full text-center mt-4">
-            <p className="text-white">¿Ya tienes una cuenta?</p>
-            <Link href="/login" className="text-sm text-white hover:text-black underline">
-              Inicia sesión aquí
+            <p className="text-white">¿No tienes una cuenta?</p>
+            <Link href="/register" className="text-sm text-white hover:text-black underline">
+              Registrarse aquí
             </Link>
           </div>
         </section>
