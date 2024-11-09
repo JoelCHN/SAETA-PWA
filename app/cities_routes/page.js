@@ -17,7 +17,7 @@ export default async function Address() {
 				<ul className="flex flex-col gap-4 items-center">
 					{routes.map((route) => (
 						<li key={route.id}>
-                            <Link href={`cities_routes/route/${route.id}`} className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100">
+                            <Link href={`cities_routes/${route.id}`} className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100">
                                 <Image src={route.vehicle_img} alt={route.vehicle_type} className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" />
                                 <div class="flex flex-col justify-between p-4 leading-normal">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">RUTA {route.short_name} | {route.long_name}</h5>
