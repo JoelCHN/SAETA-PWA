@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";  
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { ref, set } from "firebase/database";
 import { auth } from '../components/firebaseConfig';
 
 export default function Login() {
