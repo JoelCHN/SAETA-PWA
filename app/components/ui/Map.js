@@ -14,7 +14,7 @@ export function Map({ ida, vuelta }) {
         version: "weekly",
       });
 
-      const { Map, InfoWindow } = await loader.importLibrary("maps");
+      const { Map, InfoWindow, Polyline } = await loader.importLibrary("maps");
       const { AdvancedMarkerElement, PinElement } =
         await google.maps.importLibrary("marker");
 
@@ -33,6 +33,8 @@ export function Map({ ida, vuelta }) {
 
       const map = new Map(mapRef.current, mapOptions);
       const infoWindow = new InfoWindow();
+      const pathCoordinatesIda = [];
+      const pathCoordinatesVuelta = [];
 
       ida.forEach((element, index) => {
         const parser = new DOMParser();
@@ -56,6 +58,7 @@ export function Map({ ida, vuelta }) {
           15,
           "N"
         );
+        pathCoordinatesIda.push(latLng);
 
         const marker = new AdvancedMarkerElement({
           map: map,
@@ -96,6 +99,7 @@ export function Map({ ida, vuelta }) {
           15,
           "N"
         );
+        pathCoordinatesVuelta.push(latLng);
 
         const marker = new AdvancedMarkerElement({
           map: map,
@@ -112,6 +116,24 @@ export function Map({ ida, vuelta }) {
           infoWindow.setContent(marker.title);
           infoWindow.open(marker.map, marker);
         });
+      });
+
+      new Polyline({
+        path: pathCoordinatesIda, // Usar el array de coordenadas
+        geodesic: true,
+        strokeColor: "#16537e",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+        map: map,
+      });
+
+      new Polyline({
+        path: pathCoordinatesVuelta, // Usar el array de coordenadas
+        geodesic: true,
+        strokeColor: "#990000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+        map: map,
       });
     };
 
