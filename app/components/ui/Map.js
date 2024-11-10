@@ -14,15 +14,16 @@ export function Map({ ida, vuelta }) {
         version: "weekly",
       });
 
-      const { Map } = await loader.importLibrary("maps");
-      const { AdvancedMarkerElement } = await google.maps.importLibrary(
-        "marker"
-      );
+      const { Map, InfoWindow } = await loader.importLibrary("maps");
+      const { AdvancedMarkerElement, PinElement } =
+        await google.maps.importLibrary("marker");
 
       const vhsPosition = {
         lat: 17.98689,
         lng: -92.93028,
       };
+
+      const utm = new UTMLatLng();
 
       const mapOptions = {
         center: vhsPosition,
@@ -31,36 +32,73 @@ export function Map({ ida, vuelta }) {
       };
 
       const map = new Map(mapRef.current, mapOptions);
+      const infoWindow = new InfoWindow();
 
-      ida.forEach((element) => {
+      ida.forEach((element, index) => {
         const busStopImg = document.createElement("img");
         busStopImg.src = "/icons/bus-stop.png";
-        busStopImg.className = "w-8 h-8 text-white bg-white rouded-full";
+        busStopImg.className = "w-8 h-8";
+
+        const pin = new PinElement({
+          glyph: busStopImg,
+          scale: 1.5,
+        });
+
+        const latLng = utm.convertUtmToLatLng(
+          element.latitude,
+          element.altitude,
+          15,
+          "N"
+        );
 
         const marker = new AdvancedMarkerElement({
           map: map,
-          position: {
-            lat: element.latitude / 10000,
-            lng: element.altitude / 10000,
-          },
-          title: element.name,
-          content: busStopImg,
+          position: latLng,
+          title: `Parada ${index + 1} - ${element.name}`,
+          content: pin.element,
+          gmpClickable: true,
+        });
+
+        marker.addListener("click", ({ domEvent, latLng }) => {
+          const { target } = domEvent;
+
+          infoWindow.close();
+          infoWindow.setContent(marker.title);
+          infoWindow.open(marker.map, marker);
         });
       });
 
-      vuelta.forEach((element) => {
+      vuelta.forEach((element, index) => {
         const busStopImg = document.createElement("img");
         busStopImg.src = "/icons/bus-stop.png";
-        busStopImg.className = "w-8 h-8 text-white bg-white rouded-full";
+        busStopImg.className = "w-8 h-8";
+
+        const pin = new PinElement({
+          glyph: busStopImg,
+          scale: 1.5,
+        });
+
+        const latLng = utm.convertUtmToLatLng(
+          element.latitude,
+          element.altitude,
+          15,
+          "N"
+        );
 
         const marker = new AdvancedMarkerElement({
           map: map,
-          position: {
-            lat: element.latitude / 10000,
-            lng: element.altitude / 10000,
-          },
-          title: element.name,
-          content: busStopImg,
+          position: latLng,
+          title: `Parada ${index + 1} - ${element.name}`,
+          content: pin.element,
+          gmpClickable: true,
+        });
+
+        marker.addListener("click", ({ domEvent, latLng }) => {
+          const { target } = domEvent;
+
+          infoWindow.close();
+          infoWindow.setContent(marker.title);
+          infoWindow.open(marker.map, marker);
         });
       });
     };
