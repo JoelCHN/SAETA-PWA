@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.8",
     "@react-google-maps/api": "^2.20.3",
     "firebase": "^11.0.1",
     "next": "14.2.15",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "utm-latlng": "^1.0.8"
   },
   "devDependencies": {
+    "@types/google__maps": "^0.5.20",
     "@types/node": "22.7.5",
     "@types/react": "18.3.11",
     "eslint": "^8",
