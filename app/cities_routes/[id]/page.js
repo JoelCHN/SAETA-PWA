@@ -76,8 +76,8 @@ export default async function Page({ params }) {
         </nav>
 
         <section className="mb-4">
-          <div className="max-w-7xl p-6 flex flex-col md:flex-row md:justify-between overflow-hidden bg-white border border-gray-200 rounded-lg shadow">
-            <div className="order-2 md:order-1">
+          <div className="max-w-7xl flex flex-col md:flex-row md:justify-between items-center overflow-hidden bg-white border border-gray-200 rounded-lg shadow">
+            <div className="order-2 md:order-1 p-6">
               <h1 className="text-4xl uppercase font-bold mb-2">
                 Ruta {routeDetails.route_type} {routeDetails.short_name}
               </h1>
@@ -95,7 +95,7 @@ export default async function Page({ params }) {
                 </span>
               )}
             </div>
-            <div className="order-1 mb-10 md:order-2 md:mb-0 flex items-center justify-center">
+            <div className="order-1 mb-10 md:order-2 md:mb-0 flex items-center justify-center p-6">
               <Image
                 className="aspect-[1111/512]"
                 src={
@@ -112,7 +112,8 @@ export default async function Page({ params }) {
         </section>
 
         <div
-          className={`mt-2 border-b-4 border-[${routeDetails.color}] mb-4`}
+          className="mt-2 border-b-4 mb-4"
+          style={{ borderColor: routeDetails.color }}
         ></div>
 
         <section className="mb-4 shadow">
@@ -238,6 +239,9 @@ export default async function Page({ params }) {
           vuelta={routeDetails.Return[0].stops}
           idaAddress={routeDetails.Going[0].address}
           vueltaAddress={routeDetails.Return[0].address}
+          longName={routeDetails.long_name}
+          shortName={routeDetails.short_name}
+          type={routeDetails.route_type}
         />
       </>
     );
