@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UTMLatLng from "utm-latlng";
 import { Loader } from "@googlemaps/js-api-loader";
 
 export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
   const mapRef = React.useRef(null);
+  const [mapInstance, setMapInstance] = useState(null);
+  const [showIda, setShowIda] = useState(true);
+  const [showVuelta, setShowVuelta] = useState(true);
+  const idaLineRef = React.useRef(null);
+  const vueltaLineRef = React.useRef(null);
 
   useEffect(() => {
     const initMap = async () => {
@@ -18,11 +23,7 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
       const { AdvancedMarkerElement, PinElement } =
         await google.maps.importLibrary("marker");
 
-      const vhsPosition = {
-        lat: 17.98689,
-        lng: -92.93028,
-      };
-
+      const vhsPosition = { lat: 17.98689, lng: -92.93028 };
       const utm = new UTMLatLng();
 
       const mapOptions = {
@@ -32,6 +33,7 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
       };
 
       const map = new Map(mapRef.current, mapOptions);
+      setMapInstance(map);
       const infoWindow = new InfoWindow();
       const pathCoordinatesIda = [];
       const pathCoordinatesVuelta = [];
@@ -70,7 +72,6 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
 
         marker.addListener("click", ({ domEvent, latLng }) => {
           const { target } = domEvent;
-
           infoWindow.close();
           infoWindow.setContent(marker.title);
           infoWindow.open(marker.map, marker);
@@ -111,68 +112,85 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
 
         marker.addListener("click", ({ domEvent, latLng }) => {
           const { target } = domEvent;
-
           infoWindow.close();
           infoWindow.setContent(marker.title);
           infoWindow.open(marker.map, marker);
         });
       });
 
-      let idaLine = new Polyline({
-        path: pathCoordinatesIda, // Usar el array de coordenadas
+      idaLineRef.current = new Polyline({
+        path: pathCoordinatesIda,
         geodesic: true,
         strokeColor: "#16537e",
         strokeOpacity: 1.0,
         strokeWeight: 5,
       });
 
-      let vueltaLine = new Polyline({
-        path: pathCoordinatesVuelta, // Usar el array de coordenadas
+      vueltaLineRef.current = new Polyline({
+        path: pathCoordinatesVuelta,
         geodesic: true,
         strokeColor: "#990000",
         strokeOpacity: 1.0,
         strokeWeight: 5,
       });
+
+      if (showIda) idaLineRef.current.setMap(map);
+      if (showVuelta) vueltaLineRef.current.setMap(map);
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     initMap();
-  }, [ida, vuelta, idaAddress, vueltaAddress]);
+  }, [ida, vuelta]);
+
+  useEffect(() => {
+    if (idaLineRef.current) {
+      idaLineRef.current.setMap(showIda ? mapInstance : null);
+    }
+  }, [showIda, mapInstance]);
+
+  useEffect(() => {
+    if (vueltaLineRef.current) {
+      vueltaLineRef.current.setMap(showVuelta ? mapInstance : null);
+    }
+  }, [showVuelta, mapInstance]);
 
   return (
     <section className="relative shadow">
       <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-10 bg-slate-800/50">
-        <div class="flex flex-wrap justify-center items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
-          <div class="flex items-center">
+        <div className="flex flex-wrap justify-center items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
+          <div className="flex items-center">
             <input
-              id="default-checkbox"
+              id="ida-checkbox"
               type="checkbox"
-              value=""
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              checked={showIda}
+              onChange={() => setShowIda(!showIda)}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
             />
             <label
-              for="default-checkbox"
-              class="ms-2 text-sm font-medium text-white"
+              htmlFor="ida-checkbox"
+              className="ms-2 text-sm font-medium text-white"
             >
               Mostrar ruta de ida
             </label>
           </div>
-          <div class="flex items-center">
+          <div className="flex items-center">
             <input
-              id="checked-checkbox"
+              id="vuelta-checkbox"
               type="checkbox"
-              value=""
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              checked={showVuelta}
+              onChange={() => setShowVuelta(!showVuelta)}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
             />
             <label
-              for="checked-checkbox"
-              class="ms-2 text-sm font-medium text-white"
+              htmlFor="vuelta-checkbox"
+              className="ms-2 text-sm font-medium text-white"
             >
               Mostrar ruta de vuelta
             </label>
           </div>
         </div>
       </div>
-      <div className="" style={{ height: "500px" }} ref={mapRef} />
+      <div style={{ height: "500px" }} ref={mapRef} />
     </section>
   );
 }
