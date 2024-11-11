@@ -4,7 +4,15 @@ import React, { useEffect, useState } from "react";
 import UTMLatLng from "utm-latlng";
 import { Loader } from "@googlemaps/js-api-loader";
 
-export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
+export function Map({
+  ida,
+  vuelta,
+  idaAddress,
+  vueltaAddress,
+  longName,
+  shortName,
+  type,
+}) {
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = useState(null);
   const [showIda, setShowIda] = useState(true);
@@ -53,7 +61,7 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
         const contentString =
           "<div>" +
           `<h1 class="text-base uppercase font-bold"><b>${element.name}</b></h1>` +
-          `<span class="text-xs font-light italic">${vueltaAddress}</span>` +
+          `<span class="text-xs font-light italic">${idaAddress}</span>` +
           `<p class="text-md">${element.road}</p>` +
           "</div>";
 
@@ -184,9 +192,12 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
   }, [showVuelta, mapInstance]);
 
   return (
-    <section className="relative shadow">
-      <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-20 md:h-10 bg-black/40">
-        <div className="flex flex-wrap md:justify-center md:items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
+    <section className="shadow">
+      <div className="flex flex-col md:flex-row p-2 items-center justify-center md:justify-between w-full h-32 md:h-10 bg-black">
+        <span className="text-white font-semibold md:text-balance text-sm md:ms-4 text-center md:text-left mb-2 md:mb-0">
+          Ruta {type} {shortName}: {longName}
+        </span>
+        <div className="flex flex-wrap gap-2 md:me-4 items-center justify-center">
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"

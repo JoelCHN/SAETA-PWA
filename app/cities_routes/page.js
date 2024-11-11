@@ -47,7 +47,7 @@ export default async function Address() {
           <form className="flex flex-col justify-center gap-2 md:flex-row md:justify-between mb-4">
             <select
               id="countries"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-1/4 p-2.5"
             >
               <option selected>Seleccione la agencia</option>
               <option value="arvit">ARVIT</option>
@@ -58,7 +58,7 @@ export default async function Address() {
               <option value="genesisxxi">GENESIS XXI</option>
               <option value="lineadorada">LINEA DORADA</option>
             </select>
-            <div class="relative">
+            <div class="relative w-full md:w-1/4">
               <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   class="w-4 h-4 text-gray-500"
@@ -79,9 +79,8 @@ export default async function Address() {
               <input
                 type="search"
                 id="default-search"
-                class="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Urbana, Numero, Ruta ..."
-                required
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Numero, Ruta ..."
               />
               <button
                 type="submit"
@@ -96,39 +95,45 @@ export default async function Address() {
               <li key={route.id}>
                 <Link
                   href={`cities_routes/${route.id}`}
-                  className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl hover:bg-gray-100"
+                  className="flex flex-col items-center justify-between bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl h-1/2 hover:bg-gray-100 overflow-hidden"
                 >
-                  <Image
-                    src={
-                      route.agency === "ARVIT"
-                        ? "/agency/Arvit_Icon.png"
-                        : "/agency/Vicosertra_Icon.png"
-                    }
-                    width={500}
-                    height={500}
-                    alt={route.agency}
-                    className="object-cover aspect-video w-full rounded-t-lg h-96 md:h-auto md:w-1/4 md:rounded-none md:rounded-s-lg"
-                  />
-                  <div className="flex flex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                      RUTA {route.short_name}
-                    </h5>
-                    <h6 className="mb-3 text-xl font-semibold tracking-tight text-gray-800">
-                      {route.long_name}
-                    </h6>
-                    <p className="mb-3 font-normal text-gray-700">
-                      {route.route_type}{" "}
-                      {route.status ? (
-                        <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400">
-                          Activa
-                        </span>
-                      ) : (
-                        <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
-                          Inactiva
-                        </span>
-                      )}
-                    </p>
+                  <div className="flex flex-col md:flex-row w-full h-full">
+                    <Image
+                      src={
+                        route.agency === "ARVIT"
+                          ? "/agency/Arvit_Icon.png"
+                          : "/agency/Vicosertra_Icon.png"
+                      }
+                      width={400}
+                      height={400}
+                      alt={route.agency}
+                      className="object-contain aspect-[800/480] w-full rounded-t-lg md:h-auto md:w-1/4 md:rounded-none md:rounded-s-lg"
+                    />
+                    <div className="flex flex-col justify-between p-4 leading-normal">
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                        RUTA {route.short_name}
+                      </h5>
+                      <h6 className="mb-3 text-xl font-semibold tracking-tight text-gray-800">
+                        {route.long_name}
+                      </h6>
+                      <p className="mb-3 font-normal text-gray-700">
+                        {route.route_type}{" "}
+                        {route.status ? (
+                          <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400">
+                            Activa
+                          </span>
+                        ) : (
+                          <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
+                            Inactiva
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
+                  <div
+                    className="w-80 h-full aspect-video skew-x-[-30deg] hidden md:block translate-x-10"
+                    style={{ backgroundColor: route.color }}
+                  ></div>
                 </Link>
               </li>
             ))}
