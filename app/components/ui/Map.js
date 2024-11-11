@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import UTMLatLng from "utm-latlng";
 import { Loader } from "@googlemaps/js-api-loader";
 
-export function Map({ ida, vuelta }) {
+export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
   const mapRef = React.useRef(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export function Map({ ida, vuelta }) {
 
       const mapOptions = {
         center: vhsPosition,
-        zoom: 15,
+        zoom: 14,
         mapId: "MY_NEXTJS_MAPID",
       };
 
@@ -118,27 +118,61 @@ export function Map({ ida, vuelta }) {
         });
       });
 
-      new Polyline({
+      let idaLine = new Polyline({
         path: pathCoordinatesIda, // Usar el array de coordenadas
         geodesic: true,
         strokeColor: "#16537e",
         strokeOpacity: 1.0,
-        strokeWeight: 2,
-        map: map,
+        strokeWeight: 5,
       });
 
-      new Polyline({
+      let vueltaLine = new Polyline({
         path: pathCoordinatesVuelta, // Usar el array de coordenadas
         geodesic: true,
         strokeColor: "#990000",
         strokeOpacity: 1.0,
-        strokeWeight: 2,
-        map: map,
+        strokeWeight: 5,
       });
     };
 
     initMap();
-  }, [ida, vuelta]);
+  }, [ida, vuelta, idaAddress, vueltaAddress]);
 
-  return <div style={{ height: "500px" }} ref={mapRef} />;
+  return (
+    <section className="relative shadow">
+      <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-10 bg-slate-800/50">
+        <div class="flex flex-wrap justify-center items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
+          <div class="flex items-center">
+            <input
+              id="default-checkbox"
+              type="checkbox"
+              value=""
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+            />
+            <label
+              for="default-checkbox"
+              class="ms-2 text-sm font-medium text-white"
+            >
+              Mostrar ruta de ida
+            </label>
+          </div>
+          <div class="flex items-center">
+            <input
+              id="checked-checkbox"
+              type="checkbox"
+              value=""
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+            />
+            <label
+              for="checked-checkbox"
+              class="ms-2 text-sm font-medium text-white"
+            >
+              Mostrar ruta de vuelta
+            </label>
+          </div>
+        </div>
+      </div>
+      <div className="" style={{ height: "500px" }} ref={mapRef} />
+    </section>
+  );
 }
