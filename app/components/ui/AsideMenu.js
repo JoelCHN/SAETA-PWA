@@ -1,5 +1,30 @@
+"use client"; 
+
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
+import { useRouter } from 'next/navigation'; 
 
 export default function AsideMenu() {
+    const [user, setUser] = useState(null);
+    const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/');
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
 return (
 <aside id="logo-sidebar"
@@ -74,6 +99,14 @@ return (
                 </a>
             </li>
             <li>
+            {user ? (
+                <button onClick={handleLogout} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 w-full text-left">
+                <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2v-2" />
+                    <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                    </svg> <span className="ms-3">Cerrar sesión</span>
+                </button>
+                ) : (
                 <a href="/login" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
                     <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -81,6 +114,7 @@ return (
                     </svg>
                     <span className="ms-3">Iniciar sesión</span>
                 </a>
+                )}
             </li>
         </ul>
     </div>

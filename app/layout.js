@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
                         </path>
                     </svg>
                 </button>
-                <a href="/dashboard" className="flex ms-2 md:me-24">
+                <a href="/" className="flex ms-2 md:me-24">
                     <Image src="/icon512_rounded.png" alt="App logo" width={32} height={32} priority />
                     <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
                         SAETA
