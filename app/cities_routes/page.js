@@ -80,7 +80,7 @@ export default async function Address() {
                 type="search"
                 id="default-search"
                 class="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search Mockups, Logos..."
+                placeholder="Urbana, Numero, Ruta ..."
                 required
               />
               <button
@@ -104,15 +104,18 @@ export default async function Address() {
                         ? "/agency/Arvit_Icon.png"
                         : "/agency/Vicosertra_Icon.png"
                     }
-                    width={400}
-                    height={200}
+                    width={500}
+                    height={500}
                     alt={route.agency}
-                    className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+                    className="object-cover aspect-video w-full rounded-t-lg h-96 md:h-auto md:w-1/4 md:rounded-none md:rounded-s-lg"
                   />
                   <div className="flex flex-col justify-between p-4 leading-normal">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                      RUTA {route.short_name} | {route.long_name}
+                      RUTA {route.short_name}
                     </h5>
+                    <h6 className="mb-3 text-xl font-semibold tracking-tight text-gray-800">
+                      {route.long_name}
+                    </h6>
                     <p className="mb-3 font-normal text-gray-700">
                       {route.route_type}{" "}
                       {route.status ? (
