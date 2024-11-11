@@ -185,38 +185,28 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
 
   return (
     <section className="relative shadow">
-      <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-10 bg-slate-800/50">
-        <div className="flex flex-wrap justify-center items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
-          <div className="flex items-center px-2">
+      <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-20 md:h-10 bg-black/40">
+        <div className="flex flex-wrap md:justify-center md:items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
+          <label class="relative inline-flex items-center cursor-pointer">
             <input
-              id="ida-checkbox"
               type="checkbox"
+              class="sr-only peer"
               checked={showIda}
               onChange={() => setShowIda(!showIda)}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
             />
-            <label
-              htmlFor="ida-checkbox"
-              className="ms-2 text-sm font-medium text-white"
-            >
-              Mostrar ruta de ida
-            </label>
-          </div>
-          <div className="flex items-center px-2">
+            <div class="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 ring-red-500 after:duration-300 after:bg-red-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-8 peer-hover:after:scale-95"></div>
+            <span className="px-2 text-white">Mostrar ruta de ida</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
             <input
-              id="vuelta-checkbox"
               type="checkbox"
+              class="sr-only peer"
               checked={showVuelta}
               onChange={() => setShowVuelta(!showVuelta)}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
             />
-            <label
-              htmlFor="vuelta-checkbox"
-              className="ms-2 text-sm font-medium text-white"
-            >
-              Mostrar ruta de vuelta
-            </label>
-          </div>
+            <div class="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 ring-red-500 after:duration-300 after:bg-red-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-8 peer-hover:after:scale-95"></div>
+            <span className="px-2 text-white">Mostrar ruta de vuelta</span>
+          </label>
         </div>
       </div>
       <div style={{ height: "500px" }} ref={mapRef} />

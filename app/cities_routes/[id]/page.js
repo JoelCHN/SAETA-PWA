@@ -32,9 +32,9 @@ export default async function Page({ params }) {
               </span>
             )}
           </div>
-          <div className="order-1 md:order-2">
+          <div className="order-1 mb-5 md:order-2 md:mb-0 flex items-center justify-center">
             <Image
-              className="aspect-square border "
+              className="aspect-square border"
               src={routeDetails.vehicle_img}
               alt={routeDetails.vehicle_type}
               width={200}
