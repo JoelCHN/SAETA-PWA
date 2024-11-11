@@ -123,7 +123,7 @@ export default async function Page({ params }) {
                   <div class="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
                     <div class="flex-shrink-0">
                       <svg
-                        className="h-8 w-8 p-1 bg-blue-900 text-white rounded-full"
+                        className="h-8 w-8 p-1 bg-red-900 text-white rounded-full"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -166,6 +166,7 @@ export default async function Page({ params }) {
         ida={routeDetails.Going[0].stops}
         vuelta={routeDetails.Return[0].stops}
         idaAddress={routeDetails.Going[0].address}
+        vueltaAddress={routeDetails.Return[0].address}
       />
     </>
   );

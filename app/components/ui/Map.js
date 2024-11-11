@@ -11,6 +11,8 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
   const [showVuelta, setShowVuelta] = useState(true);
   const idaLineRef = React.useRef(null);
   const vueltaLineRef = React.useRef(null);
+  const idaMarkersRef = React.useRef([]);
+  const vueltaMarkersRef = React.useRef([]);
 
   useEffect(() => {
     const initMap = async () => {
@@ -38,7 +40,8 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
       const pathCoordinatesIda = [];
       const pathCoordinatesVuelta = [];
 
-      ida.forEach((element, index) => {
+      // Agregar markers y rutas de ida
+      idaMarkersRef.current = ida.map((element, index) => {
         const parser = new DOMParser();
         const pinSvgString =
           '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M18 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M10 5h7c2.761 0 5 3.134 5 7v5h-2" /><path d="M16 17h-8" /><path d="M16 5l1.5 7h4.5" /><path d="M9.5 10h7.5" /><path d="M12 5v5" /><path d="M5 9v11" /></svg>';
@@ -46,6 +49,13 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
           pinSvgString,
           "image/svg+xml"
         ).documentElement;
+
+        const contentString =
+          "<div>" +
+          `<h1 class="text-base uppercase font-bold"><b>${element.name}</b></h1>` +
+          `<span class="text-xs font-light italic">${vueltaAddress}</span>` +
+          `<p class="text-md">${element.road}</p>` +
+          "</div>";
 
         const pin = new PinElement({
           glyph: pinSvg,
@@ -73,12 +83,16 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
         marker.addListener("click", ({ domEvent, latLng }) => {
           const { target } = domEvent;
           infoWindow.close();
-          infoWindow.setContent(marker.title);
+          infoWindow.setContent(contentString);
+          infoWindow.setHeaderContent(`Parada ${index + 1}`);
           infoWindow.open(marker.map, marker);
         });
+
+        return marker;
       });
 
-      vuelta.forEach((element, index) => {
+      // Agregar markers y rutas de vuelta
+      vueltaMarkersRef.current = vuelta.map((element, index) => {
         const parser = new DOMParser();
         const pinSvgString =
           '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M18 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M10 5h7c2.761 0 5 3.134 5 7v5h-2" /><path d="M16 17h-8" /><path d="M16 5l1.5 7h4.5" /><path d="M9.5 10h7.5" /><path d="M12 5v5" /><path d="M5 9v11" /></svg>';
@@ -86,6 +100,13 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
           pinSvgString,
           "image/svg+xml"
         ).documentElement;
+
+        const contentString =
+          "<div>" +
+          `<h1 class="text-base uppercase font-bold"><b>${element.name}</b></h1>` +
+          `<span class="text-xs font-light italic">${vueltaAddress}</span>` +
+          `<p class="text-md">${element.road}</p>` +
+          "</div>";
 
         const pin = new PinElement({
           glyph: pinSvg,
@@ -113,9 +134,12 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
         marker.addListener("click", ({ domEvent, latLng }) => {
           const { target } = domEvent;
           infoWindow.close();
-          infoWindow.setContent(marker.title);
+          infoWindow.setContent(contentString);
+          infoWindow.setHeaderContent(`Parada ${index + 1}`);
           infoWindow.open(marker.map, marker);
         });
+
+        return marker;
       });
 
       idaLineRef.current = new Polyline({
@@ -138,7 +162,6 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
       if (showVuelta) vueltaLineRef.current.setMap(map);
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     initMap();
   }, [ida, vuelta]);
 
@@ -146,19 +169,25 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
     if (idaLineRef.current) {
       idaLineRef.current.setMap(showIda ? mapInstance : null);
     }
+    idaMarkersRef.current.forEach((marker) =>
+      marker.setMap(showIda ? mapInstance : null)
+    );
   }, [showIda, mapInstance]);
 
   useEffect(() => {
     if (vueltaLineRef.current) {
       vueltaLineRef.current.setMap(showVuelta ? mapInstance : null);
     }
+    vueltaMarkersRef.current.forEach((marker) =>
+      marker.setMap(showVuelta ? mapInstance : null)
+    );
   }, [showVuelta, mapInstance]);
 
   return (
     <section className="relative shadow">
       <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-10 bg-slate-800/50">
         <div className="flex flex-wrap justify-center items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
-          <div className="flex items-center">
+          <div className="flex items-center px-2">
             <input
               id="ida-checkbox"
               type="checkbox"
@@ -173,7 +202,7 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
               Mostrar ruta de ida
             </label>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center px-2">
             <input
               id="vuelta-checkbox"
               type="checkbox"
