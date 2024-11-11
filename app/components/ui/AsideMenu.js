@@ -7,13 +7,11 @@ import { useRouter } from 'next/navigation';
 
 export default function AsideMenu() {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
     const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -28,9 +26,6 @@ export default function AsideMenu() {
     }
   };
 
-  if (loading) {
-    return <div></div>;
-  }
 
 return (
 <aside id="logo-sidebar"
