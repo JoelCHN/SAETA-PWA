@@ -187,25 +187,29 @@ export function Map({ ida, vuelta, idaAddress, vueltaAddress }) {
     <section className="relative shadow">
       <div className="absolute flex items-center justify-center z-10 top-0 left-0 w-full h-20 md:h-10 bg-black/40">
         <div className="flex flex-wrap md:justify-center md:items-center w-11/12 mx-auto select-none gap-2 max-w-[500px]">
-          <label className="relative inline-flex items-center cursor-pointer">
+          <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              className="sr-only peer"
               checked={showIda}
               onChange={() => setShowIda(!showIda)}
+              className="sr-only peer"
             />
-            <div className="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 ring-red-500 after:duration-300 after:bg-red-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-8 peer-hover:after:scale-95"></div>
-            <span className="px-2 text-white">Mostrar ruta de ida</span>
+            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-white">
+              Mostrar ruta de ida
+            </span>
           </label>
-          <label className="relative inline-flex items-center cursor-pointer">
+          <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              className="sr-only peer"
               checked={showVuelta}
               onChange={() => setShowVuelta(!showVuelta)}
+              className="sr-only peer"
             />
-            <div className="group peer bg-white rounded-full duration-300 w-16 h-8 ring-2 ring-red-500 after:duration-300 after:bg-red-500 peer-checked:after:bg-green-500 peer-checked:ring-green-500 after:rounded-full after:absolute after:h-6 after:w-6 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-8 peer-hover:after:scale-95"></div>
-            <span className="px-2 text-white">Mostrar ruta de vuelta</span>
+            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-white">
+              Mostrar ruta de vuelta
+            </span>
           </label>
         </div>
       </div>

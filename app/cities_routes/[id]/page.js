@@ -95,7 +95,7 @@ export default async function Page({ params }) {
                 </span>
               )}
             </div>
-            <div className="order-1 mb-5 md:order-2 md:mb-0 flex items-center justify-center">
+            <div className="order-1 mb-10 md:order-2 md:mb-0 flex items-center justify-center">
               <Image
                 className="aspect-[1111/512]"
                 src={
