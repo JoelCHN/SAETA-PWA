@@ -1,21 +1,62 @@
-import React from "react";
+"use client";
 
-const CartPlace = ({ title = "Título del lugar", description = "Descripción breve del lugar." }) => {
+import React from "react";
+import { useRouter } from "next/navigation";
+import { Button, Card, Rating } from "flowbite-react";
+import { HiStar } from "react-icons/hi";
+
+const CartPlace = ({ id, title, age, imageUrl }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`../../places/${id}`);
+  };
+
+  const handleButtonClick = (event) => {
+    event.stopPropagation(); 
+    router.push(`../../places/${id}`);
+  };
   return (
-    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-      <img
-        className="w-full h-48 object-cover"
-        src="https://via.placeholder.com/150"
-        alt="Lugar turístico"
-      />
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-        <p className="text-gray-600 mt-2">{description}</p>
+    <Card
+      className="max-w-xs cursor-pointer"
+      imgSrc={imageUrl.src}
+      onClick={handleCardClick}
+      imgAlt={title}
+    >
+      <h5 className="text-lg font-semibold tracking-tight text-gray-800">{title}</h5>
+      <Rating>
+        {[...Array(5)].map((_, index) => (
+          <HiStar key={index} className="text-yellow-400" />
+        ))}
+      </Rating>
+
+      <p className="text-gray-600 mt-2">{age}</p>
+
+      <div className="flex justify-end mb-0 mt-2">
+        <a
+          href="#"
+          onClick={handleButtonClick}
+          className="cursor-pointer transition-transform transform hover:scale-105 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Conocer más
+          <svg
+            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </a>
       </div>
-      <div className="p-4 flex justify-end">
-        <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Ver más</button>
-      </div>
-    </div>
+    </Card>
   );
 };
 
