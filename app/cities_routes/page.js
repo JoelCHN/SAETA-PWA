@@ -95,7 +95,7 @@ export default async function Address() {
               <li key={route.id}>
                 <Link
                   href={`cities_routes/${route.id}`}
-                  className="flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl h-1/2 hover:bg-gray-100 overflow-hidden"
+                  className="relative flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl h-1/2 hover:bg-gray-100 overflow-hidden"
                 >
                   <div className="flex flex-col md:flex-row w-full h-full">
                     <Image
@@ -142,6 +142,20 @@ export default async function Address() {
                     className="w-80 h-auto aspect-video skew-x-[-30deg] hidden md:block translate-x-[4.6rem]"
                     style={{ backgroundColor: route.color }}
                   ></div>
+                  <div class="absolute right-0 top-0 flex rounded-bl-2xl px-4 py-2 bg-blue-900">
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4 text-pink-600 bg-pink-100 border-pink-300 rounded focus:ring-pink-500 focus:ring-1"
+                    />
+                    <label
+                      for="default-checkbox"
+                      className="ms-2 text-sm font-bold text-white"
+                    >
+                      Fav
+                    </label>
+                  </div>
                 </Link>
               </li>
             ))}
