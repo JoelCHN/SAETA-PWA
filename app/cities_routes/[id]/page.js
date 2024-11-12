@@ -95,7 +95,7 @@ export default async function Page({ params }) {
                 </span>
               )}
             </div>
-            <div className="order-1 mb-10 md:order-2 md:mb-0 flex items-center justify-center p-6">
+            <div className="order-1 my-5 md:order-2 md:mb-0 flex items-center justify-center p-6">
               <Image
                 className="aspect-[1111/512]"
                 src={
@@ -111,20 +111,18 @@ export default async function Page({ params }) {
           </div>
         </section>
 
-        <div
-          className="mt-2 border-b-4 mb-4"
-          style={{ borderColor: routeDetails.color }}
-        ></div>
-
-        <section className="mb-4 shadow">
-          <div className="relative overflow-x-auto overflow-y-auto max-h-96">
+        <section className="mb-4 shadow rounded">
+          <div className="relative overflow-x-auto overflow-y-auto max-h-96 rounded">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+              <thead
+                className="text-xs text-gray-700 uppercase"
+                style={{ backgroundColor: routeDetails.color }}
+              >
                 <tr>
                   <th
                     colSpan={2}
                     scope="col"
-                    className="px-6 py-3 text-center text-xl"
+                    className="px-6 py-3 text-center text-xl text-white"
                   >
                     Recorrido
                   </th>
@@ -141,10 +139,10 @@ export default async function Page({ params }) {
                 </tr>
               </thead>
             </table>
-            <article className="flex flex-row justify-between">
-              <div className="w-full px-3 mx-auto">
+            <article className="flex flex-row justify-between rounded">
+              <div className="w-full mx-auto">
                 {routeDetails.Going[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2 p-1">
+                  <div key={index} className="border p-4">
                     <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
                       <div className="flex-shrink-0">
                         <svg
@@ -171,25 +169,24 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                      <div className="flex-1 min-w-0 ms-0 md:ms-4">
+                        <p className="text-xs md:text-sm font-medium text-gray-900 ">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-xs italic md:text-sm text-gray-500 ">
                           {stop.road}
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900">
+                      <div className="inline-flex items-center text-sm md:text-base font-semibold text-gray-900">
                         {stop.is_terminal ? "Terminal" : "Parada"}
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="h-auto border-2 border-gray-300"></div>
-              <div className="w-full px-3 mx-auto">
+              <div className="w-full mx-auto">
                 {routeDetails.Return[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2">
+                  <div key={index} className="border p-4">
                     <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
                       <div className="flex-shrink-0">
                         <svg
@@ -216,15 +213,15 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                      <div className="flex-1 min-w-0 ms-0 md:ms-4">
+                        <p className="text-xs md:text-sm font-medium text-gray-900 ">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-xs italic md:text-sm text-gray-500 ">
                           {stop.road}
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900">
+                      <div className="inline-flex items-center text-sm md:text-base font-semibold text-gray-900">
                         {stop.is_terminal ? "Terminal" : "Parada"}
                       </div>
                     </div>
@@ -242,6 +239,7 @@ export default async function Page({ params }) {
           longName={routeDetails.long_name}
           shortName={routeDetails.short_name}
           type={routeDetails.route_type}
+          color={routeDetails.color}
         />
       </>
     );

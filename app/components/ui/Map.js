@@ -12,6 +12,7 @@ export function Map({
   longName,
   shortName,
   type,
+  color,
 }) {
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = useState(null);
@@ -192,8 +193,11 @@ export function Map({
   }, [showVuelta, mapInstance]);
 
   return (
-    <section className="shadow">
-      <div className="flex flex-col md:flex-row p-2 items-center justify-center md:justify-between w-full h-32 md:h-10 bg-black">
+    <section className="rounded shadow">
+      <div
+        className="flex flex-col md:flex-row p-2 items-center justify-center md:justify-between w-full h-32 md:h-10"
+        style={{ backgroundColor: color }}
+      >
         <span className="text-white font-semibold md:text-balance text-sm md:ms-4 text-center md:text-left mb-2 md:mb-0">
           Ruta {type} {shortName}: {longName}
         </span>
