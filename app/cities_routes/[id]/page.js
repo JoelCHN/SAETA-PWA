@@ -51,9 +51,9 @@ export default async function Page({ params }) {
               </a>
             </li>
             <li aria-current="page">
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
-                  class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                  className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -61,13 +61,13 @@ export default async function Page({ params }) {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 9 4-4-4-4"
                   />
                 </svg>
-                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2">
+                <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2">
                   Detalles
                 </span>
               </div>
@@ -142,10 +142,10 @@ export default async function Page({ params }) {
               </thead>
             </table>
             <article className="flex flex-row justify-between">
-              <div className="w-full px-3 mx-auto">
+              <div className="w-full mx-auto md:px-4">
                 {routeDetails.Going[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2 p-1">
-                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
+                  <div key={index}>
+                    <div className="flex flex-col md:flex-row my-2 md:my-4 items-center text-center justify-center md:justify-between">
                       <div className="flex-shrink-0">
                         <svg
                           className="h-8 w-8 p-1 bg-blue-900 text-white rounded-full"
@@ -155,10 +155,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -171,26 +170,29 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
+                      <div className="flex-1 min-w-0 md:ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-sm text-gray-500 truncate italic">
                           {stop.road}
                         </p>
                       </div>
                       <div className="inline-flex items-center text-base font-semibold text-gray-900">
-                        {stop.is_terminal ? "Terminal" : "Parada"}
+                        {stop.is_terminal
+                          ? "Terminal " + (index + 1)
+                          : "Parada " + (index + 1)}
                       </div>
                     </div>
+                    <div className="w-4/5 md:w-auto border border-gray-200"></div>
                   </div>
                 ))}
               </div>
-              <div className="h-auto border-2 border-gray-300"></div>
-              <div className="w-full px-3 mx-auto">
+              <div className="h-auto border border-gray-200"></div>
+              <div className="w-full mx-auto md:px-4">
                 {routeDetails.Return[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2">
-                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
+                  <div key={index}>
+                    <div className="flex flex-col md:flex-row my-2 md:my-4 items-center text-center justify-center md:justify-between">
                       <div className="flex-shrink-0">
                         <svg
                           className="h-8 w-8 p-1 bg-red-900 text-white rounded-full"
@@ -200,10 +202,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -216,18 +217,21 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
+                      <div className="flex-1 min-w-0 md:ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-sm text-gray-500 truncate italic">
                           {stop.road}
                         </p>
                       </div>
                       <div className="inline-flex items-center text-base font-semibold text-gray-900">
-                        {stop.is_terminal ? "Terminal" : "Parada"}
+                        {stop.is_terminal
+                          ? "Terminal " + (index + 1)
+                          : "Parada " + (index + 1)}
                       </div>
                     </div>
+                    <div className="w-4/5 md:w-auto border border-gray-200"></div>
                   </div>
                 ))}
               </div>
