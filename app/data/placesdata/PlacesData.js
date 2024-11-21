@@ -5,6 +5,36 @@ import Convenciones from "../../../public/ImagePlaces/Convenciones.jpg"
 import Mirador from "../../../public/ImagePlaces/Mirador.jpg"
 import Museo from "../../../public/ImagePlaces/Museo.jpg"
 import Yumka from "../../../public/ImagePlaces/yumka.jpg"
+//Img de los carruceles
+import Venta1 from "../../../public/ImagePlaces/carrusel/Venta1.jpg"
+import Venta2 from "../../../public/ImagePlaces/carrusel/Venta2.jpg"
+import Venta3 from "../../../public/ImagePlaces/carrusel/Venta3.jpg"
+import Venta4 from "../../../public/ImagePlaces/carrusel/Venta4.jpg"
+
+import Centenario1 from "../../../public/ImagePlaces/carrusel/Centenario1.jpg"
+import Centenario2 from "../../../public/ImagePlaces/carrusel/Centenario2.jpg"
+import Centenario3 from "../../../public/ImagePlaces/carrusel/Centenario3.jpg"
+import Centenario4 from "../../../public/ImagePlaces/carrusel/Centenario4.jpg"
+
+import Centro1 from "../../../public/ImagePlaces/carrusel/Centro1.jpg"
+import Centro2 from "../../../public/ImagePlaces/carrusel/Centro2.jpg"
+import Centro3 from "../../../public/ImagePlaces/carrusel/Centro3.jpg" 
+import Centro4 from "../../../public/ImagePlaces/carrusel/Centro4.jpg" 
+
+import Mirador1 from "../../../public/ImagePlaces/carrusel/Mirador1.jpg"
+import Mirador2 from "../../../public/ImagePlaces/carrusel/Mirador2.jpg"
+import Mirador3 from "../../../public/ImagePlaces/carrusel/Mirador3.jpg"
+
+import Museo1 from "../../../public/ImagePlaces/carrusel/Museo1.jpg"
+import Museo2 from "../../../public/ImagePlaces/carrusel/Museo2.jpg"
+import Museo3 from "../../../public/ImagePlaces/carrusel/Museo3.jpg"
+import Museo4 from "../../../public/ImagePlaces/carrusel/Museo4.jpg"
+
+import Yumka1 from "../../../public/ImagePlaces/carrusel/Yumka1.jpg"
+import Yumka2 from "../../../public/ImagePlaces/carrusel/Yumka2.jpg"
+import Yumka3 from "../../../public/ImagePlaces/carrusel/Yumka3.jpg"
+import Yumka4 from "../../../public/ImagePlaces/carrusel/Yumka4.jpg"
+import Yumka5 from "../../../public/ImagePlaces/carrusel/Yumka5.jpg"
 
 const placesData = [
     {
@@ -15,6 +45,7 @@ const placesData = [
       imageUrl: MuseoVenta,  
       authors: "Carlos Pellicer Cámara",
       age: "4 de marzo de 1958",
+      carrusel:[Venta1, Venta2, Venta3, Venta4]
     },
     {
       id: 2,
@@ -24,6 +55,7 @@ const placesData = [
       imageUrl: Centenario,   
       authors: "Gobierno del Estado de Tabasco",
       age: "27 de febrero de 1964 ",
+      carrusel:[Centenario1, Centenario2, Centenario3, Centenario4],
     },
     {
       id: 3,
@@ -33,6 +65,7 @@ const placesData = [
       imageUrl: Convenciones,   
       authors: "Programa Destinos México",
       age: "Sin registro",
+      carrusel:[Centro1,Centro2,Centro3,Centro4],
     },
     {
         id: 4,
@@ -42,6 +75,7 @@ const placesData = [
         imageUrl: Mirador,  
         authors: "Gobierno del estado de Tabasco",
         age: "2 de enero de 2004 ",
+        carrusel:[Mirador1,Mirador2,Mirador3],
       },
       {
         id: 5,
@@ -51,6 +85,7 @@ const placesData = [
         imageUrl: Museo,   
         authors: "Enrique Norten y su taller TEN Arquitectos",
         age: "Inaugurado en 2011",
+        carrusel:[Museo1, Museo2, Museo3, Museo4],
       },
       {
         id: 6,
@@ -60,6 +95,7 @@ const placesData = [
         imageUrl: Yumka,   
         authors: "Congreso del Estado de Tabasco",
         age: "19 de diciembre de 1987",
+        carrusel:[Yumka1, Yumka2, Yumka3, Yumka4, Yumka5],
       },
   ];
   

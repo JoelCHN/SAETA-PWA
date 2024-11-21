@@ -21,7 +21,6 @@ return (
         </ol>
     </nav>
 
-
     <h1 className="text-2xl font-bold text-black text-center mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
         Lugares turísticos
     </h1>
