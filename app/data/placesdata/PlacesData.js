@@ -45,7 +45,8 @@ const placesData = [
       imageUrl: MuseoVenta,  
       authors: "Carlos Pellicer Cámara",
       age: "4 de marzo de 1958",
-      carrusel:[Venta1, Venta2, Venta3, Venta4]
+      carrusel:[Venta1, Venta2, Venta3, Venta4],
+      location: { lat: 18.002023347008002, lng: -92.93345224097068}
     },
     {
       id: 2,
@@ -56,6 +57,7 @@ const placesData = [
       authors: "Gobierno del Estado de Tabasco",
       age: "27 de febrero de 1964 ",
       carrusel:[Centenario1, Centenario2, Centenario3, Centenario4],
+      location: { lat: 17.97700935896228, lng:-92.9440184763874}
     },
     {
       id: 3,
@@ -66,6 +68,7 @@ const placesData = [
       authors: "Programa Destinos México",
       age: "Sin registro",
       carrusel:[Centro1,Centro2,Centro3,Centro4],
+      location: { lat: 18.000039009684002,  lng: -92.94617054186534 } 
     },
     {
         id: 4,
@@ -76,6 +79,7 @@ const placesData = [
         authors: "Gobierno del estado de Tabasco",
         age: "2 de enero de 2004 ",
         carrusel:[Mirador1,Mirador2,Mirador3],
+        location: { lat: 17.998938332325103, lng: -92.93501690522326}
       },
       {
         id: 5,
@@ -86,6 +90,7 @@ const placesData = [
         authors: "Enrique Norten y su taller TEN Arquitectos",
         age: "Inaugurado en 2011",
         carrusel:[Museo1, Museo2, Museo3, Museo4],
+        location: { lat: 17.995889366437815,  lng: -92.93761296104064  }
       },
       {
         id: 6,
@@ -96,6 +101,7 @@ const placesData = [
         authors: "Congreso del Estado de Tabasco",
         age: "19 de diciembre de 1987",
         carrusel:[Yumka1, Yumka2, Yumka3, Yumka4, Yumka5],
+        location: { lat: 18.000866963478458,lng: -92.80412505878783}
       },
   ];
   
