@@ -109,7 +109,7 @@ export default function Details() {
                 <strong>Historia:</strong> {place.history}
             </p>
             <p className="text-gray-600 text-md mt-4"><strong>Autores:</strong> {place.authors}</p>
-            <p className="text-gray-600 text-md mt-4"><strong>Fecha de inahuguración:</strong> {place.age}</p>
+            <p className="text-gray-600 text-md mt-4"><strong>Fecha de inauguración:</strong> {place.age}</p>
         </div>
     );
 }
