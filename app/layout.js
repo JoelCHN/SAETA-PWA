@@ -15,10 +15,9 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
 export const metadata = {
   title: "SAETA",
-  description: "Servicio de enrutamiento en Tabasco",
+  description: "Sistema de Autotransporte y Enlace de Tabasco",
   // the new configuration to that by it`s a PWA
   manifest:"/manifest.json",
   icons:{
