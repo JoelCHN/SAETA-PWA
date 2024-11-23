@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import PlacesData from '../../data/placesdata/PlacesData';
+import { SingleMap } from "../../components/ui/SingleMap.js";
 import React, { useState } from "react";
 
 export default function Details() {
@@ -108,6 +109,14 @@ export default function Details() {
             <p className="text-black mb-5 mt-4 text-justify text-[1rem] w-full border-b-2 border-black pb-2">
                 <strong>Historia:</strong> {place.history}
             </p>
+            <div className=" w-full border-b-2 border-black pb-2">
+                <h2 className="text-black-500 text-center font-bold w-full pb-4">Ubicación del lugar</h2>
+                    <SingleMap
+                    location = {place.location}
+                    title = {place.title}
+                    imageUrl = {place.imageUrl.src}
+                    />
+            </div>
             <p className="text-gray-600 text-md mt-4"><strong>Autores:</strong> {place.authors}</p>
             <p className="text-gray-600 text-md mt-4"><strong>Fecha de inauguración:</strong> {place.age}</p>
         </div>
