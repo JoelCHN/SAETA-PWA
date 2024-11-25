@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import { useState } from "react";
 import UTMLatLng from "utm-latlng";
+import L from "leaflet";
 
 export function LeafletMap({
   stops_ida,
@@ -44,8 +45,22 @@ export function LeafletMap({
     );
   }
 
+  const customIconParadaUrl = "/icons/icons8-location-48.png";
+  const customIconTerminalUrl = "/icons/icons8-home-address-48.png";
   const purpleOptions = { color: "purple", weight: 5 };
   const redOptions = { color: "red", weight: 5 };
+  const customIconParada = new L.Icon({
+    iconUrl: customIconParadaUrl,
+    iconSize: [38, 38],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38],
+  });
+  const customIconTerminal = new L.Icon({
+    iconUrl: customIconTerminalUrl,
+    iconSize: [38, 38],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38],
+  });
 
   return (
     <section className="shadow">
@@ -96,7 +111,6 @@ export function LeafletMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Renderizar marcadores y ruta de ida si showIda es true */}
         {showIda && (
           <>
             {stops_ida.map((stop, index) => (
@@ -108,6 +122,7 @@ export function LeafletMap({
                   15,
                   "N"
                 )}
+                icon={stop.is_terminal ? customIconTerminal : customIconParada}
               >
                 <Popup>
                   <h1 className="text-base uppercase font-bold">{stop.name}</h1>
@@ -126,7 +141,6 @@ export function LeafletMap({
           </>
         )}
 
-        {/* Renderizar marcadores y ruta de vuelta si showVuelta es true */}
         {showVuelta && (
           <>
             {stops_vuelta.map((stop, index) => (
@@ -138,6 +152,7 @@ export function LeafletMap({
                   15,
                   "N"
                 )}
+                icon={stop.is_terminal ? customIconTerminal : customIconParada}
               >
                 <Popup>
                   <h1 className="text-base uppercase font-bold">{stop.name}</h1>
