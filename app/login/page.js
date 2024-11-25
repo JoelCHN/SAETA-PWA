@@ -28,7 +28,7 @@ export default function Login() {
       if (savedEmail === email && savedPassword === password) {
         localStorage.setItem('isAuthenticated', 'true');
         console.log("Logeado exitosamente offline");
-        window.location.reload();
+        setIsAuthenticated(true);
         router.push("/"); 
       } else {
         setError("Credenciales incorrectas.");
@@ -48,6 +48,12 @@ export default function Login() {
     return () => unsubscribe();
   }, [router]);
 
+  useEffect(() => {
+    const savedAuth = localStorage.getItem('isAuthenticated') === 'true';
+    if (savedAuth) {
+      setIsAuthenticated(true); 
+    }
+  }, []);
 
 
   const handleLogin = async (e) => {
@@ -71,9 +77,8 @@ export default function Login() {
       console.log(localStorage.getItem('password'));
       console.log(localStorage.getItem('isAuthenticated'));
 
-      window.location.reload();
       router.push("/");
-
+      setIsAuthenticated(true);
       console.log("Logeado exitosamente online");
     } catch (error) {
       setError("Error al iniciar sesión: " + error.message);
