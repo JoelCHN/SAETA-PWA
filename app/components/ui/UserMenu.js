@@ -17,13 +17,22 @@ export default function UserMenu() {
     const checkAuthStatus = () => {
         const authStatus = localStorage.getItem("isAuthenticated") === "true";
         setIsAuthenticated(authStatus);
+
+        if (!navigator.onLine) {
+            const savedUsername = localStorage.getItem("username");
+            const savedEmail = localStorage.getItem("email");
+            if (savedUsername && savedEmail) {
+                setUserName(savedUsername);
+                setUser({ email: savedEmail });
+            }
+        }
     };
 
     useEffect(() => {
 
         checkAuthStatus();
 
-        if (isAuthenticated) {
+        if (isAuthenticated && navigator.onLine) {
             const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
                 if (currentUser) {
                     setUser(currentUser);
@@ -33,7 +42,12 @@ export default function UserMenu() {
                         const snapshot = await get(userRef);
                         if (snapshot.exists()) {
                             const userData = snapshot.val();
-                            setUserName(userData.username || 'Usuario');
+                            const username = userData.username || 'Usuario';
+                            setUserName(username);
+
+                            // Guardar username y email en localStorage
+                            localStorage.setItem("username", username);
+                            localStorage.setItem("email", currentUser.email);
                         } else {
                             console.log('No user data found');
                         }
@@ -89,7 +103,7 @@ return (
                             {userName}
                         </p>
                         <p className="text-sm font-medium text-gray-900 truncate" role="none">
-                           email
+                            {user?.email}
                         </p>
                     </div>
                     <ul className="py-1" role="none">
