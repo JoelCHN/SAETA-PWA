@@ -4,23 +4,28 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 import Link from 'next/link';
-
 import Menu from '../components/ui/Menu';
 import AsideMenu from '../components/ui/AsideMenu';
 import Footer from '../components/ui/Footer';
 
 export default function Home() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        setLoading(false);
-      });
+  const checkAuthStatus = () => {
+    const authStatus = localStorage.getItem("isAuthenticated") === "true";
+    setIsAuthenticated(authStatus);
+  };
 
-      return () => unsubscribe(); // Limpia el listener cuando el componente se desmonta
-    }, []);
+  useEffect(() => {
+    checkAuthStatus();
+    setLoading(false);
+
+    const handleStorageChange = () => checkAuthStatus();
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
     if (loading) {
         return (
@@ -31,7 +36,7 @@ export default function Home() {
 
     return (
       <>
-        {user ? (
+        {isAuthenticated ? (
           <p>Tus favoritos</p>
         ) : (
             <div className="flex justify-center items-center h-64 border border-gray-300 bg-white rounded-lg shadow-lg p-6 mt-8">
