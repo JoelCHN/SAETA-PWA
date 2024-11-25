@@ -9,6 +9,7 @@ import {
   Polyline,
   Tooltip,
 } from "react-leaflet";
+import { useState } from "react";
 import UTMLatLng from "utm-latlng";
 
 export function LeafletMap({
@@ -20,6 +21,9 @@ export function LeafletMap({
   long_name,
   route_type,
 }) {
+  const [showIda, setShowIda] = useState(true); // Estado para mostrar u ocultar la ruta de ida
+  const [showVuelta, setShowVuelta] = useState(true); // Estado para mostrar u ocultar la ruta de vuelta
+
   const vhsPosition = [17.98689, -92.93028];
   const utm = new UTMLatLng();
 
@@ -50,15 +54,28 @@ export function LeafletMap({
           Ruta {route_type} {short_name}: {long_name}
         </span>
         <div className="flex flex-wrap gap-2 md:me-4 items-center justify-center">
+          {/* Checkbox para la ruta de ida */}
           <label className="inline-flex items-center cursor-pointer">
-            <input type="checkbox" className="sr-only peer" />
+            <input
+              type="checkbox"
+              checked={showIda}
+              onChange={() => setShowIda(!showIda)} // Cambia el estado de showIda
+              className="sr-only peer"
+            />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ms-3 text-sm font-medium text-white">
               Mostrar ruta de ida (<i className="text-xs">{address_ida}</i>)
             </span>
           </label>
+
+          {/* Checkbox para la ruta de vuelta */}
           <label className="inline-flex items-center cursor-pointer">
-            <input type="checkbox" className="sr-only peer" />
+            <input
+              type="checkbox"
+              checked={showVuelta}
+              onChange={() => setShowVuelta(!showVuelta)} // Cambia el estado de showVuelta
+              className="sr-only peer"
+            />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ms-3 text-sm font-medium text-white">
               Mostrar ruta de vuelta (
@@ -67,6 +84,7 @@ export function LeafletMap({
           </label>
         </div>
       </div>
+
       <MapContainer
         center={vhsPosition}
         zoom={14}
@@ -77,52 +95,68 @@ export function LeafletMap({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {stops_ida.map((stop, index) => (
-          <Marker
-            key={index}
-            position={utm.convertUtmToLatLng(
-              stop.latitude,
-              stop.altitude,
-              15,
-              "N"
-            )}
-          >
-            <Popup>
-              <h1 className="text-base uppercase font-bold">{stop.name}</h1>
-              <span className="text-xs font-light italic">{address_ida}</span>
-              <p className="text-md">{stop.road}</p>
-            </Popup>
-          </Marker>
-        ))}
-        {stops_vuelta.map((stop, index) => (
-          <Marker
-            key={index}
-            position={utm.convertUtmToLatLng(
-              stop.latitude,
-              stop.altitude,
-              15,
-              "N"
-            )}
-          >
-            <Popup>
-              <h1 className="text-base uppercase font-bold">{stop.name}</h1>
-              <span className="text-xs font-light italic">
-                {address_vuelta}
-              </span>
-              <p className="text-md">{stop.road}</p>
-            </Popup>
-          </Marker>
-        ))}
-        <Polyline pathOptions={purpleOptions} positions={ida_route}>
-          <Tooltip sticky>
-            <span className="text-sm italic font-bold">{address_ida}</span>
-          </Tooltip>
-        </Polyline>
-        <Polyline pathOptions={redOptions} positions={vuelta_route}>
-          <Tooltip sticky>
-            <span className="text-sm italic font-bold">{address_vuelta}</span>
-          </Tooltip>
-        </Polyline>
+
+        {/* Renderizar marcadores y ruta de ida si showIda es true */}
+        {showIda && (
+          <>
+            {stops_ida.map((stop, index) => (
+              <Marker
+                key={`ida-${index}`}
+                position={utm.convertUtmToLatLng(
+                  stop.latitude,
+                  stop.altitude,
+                  15,
+                  "N"
+                )}
+              >
+                <Popup>
+                  <h1 className="text-base uppercase font-bold">{stop.name}</h1>
+                  <span className="text-xs font-light italic">
+                    {address_ida}
+                  </span>
+                  <p className="text-md">{stop.road}</p>
+                </Popup>
+              </Marker>
+            ))}
+            <Polyline pathOptions={purpleOptions} positions={ida_route}>
+              <Tooltip sticky>
+                <span className="text-sm italic font-bold">{address_ida}</span>
+              </Tooltip>
+            </Polyline>
+          </>
+        )}
+
+        {/* Renderizar marcadores y ruta de vuelta si showVuelta es true */}
+        {showVuelta && (
+          <>
+            {stops_vuelta.map((stop, index) => (
+              <Marker
+                key={`vuelta-${index}`}
+                position={utm.convertUtmToLatLng(
+                  stop.latitude,
+                  stop.altitude,
+                  15,
+                  "N"
+                )}
+              >
+                <Popup>
+                  <h1 className="text-base uppercase font-bold">{stop.name}</h1>
+                  <span className="text-xs font-light italic">
+                    {address_vuelta}
+                  </span>
+                  <p className="text-md">{stop.road}</p>
+                </Popup>
+              </Marker>
+            ))}
+            <Polyline pathOptions={redOptions} positions={vuelta_route}>
+              <Tooltip sticky>
+                <span className="text-sm italic font-bold">
+                  {address_vuelta}
+                </span>
+              </Tooltip>
+            </Polyline>
+          </>
+        )}
       </MapContainer>
     </section>
   );
