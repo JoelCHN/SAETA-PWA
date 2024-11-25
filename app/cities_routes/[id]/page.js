@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Map } from "../../components/ui/Map.js";
+import { LeafletMap } from "../../components/ui/LeafletMap.js";
 
 export default async function Page({ params }) {
   try {
@@ -234,7 +235,7 @@ export default async function Page({ params }) {
             </article>
           </div>
         </section>
-        <Map
+        {/* <Map
           ida={routeDetails.Going[0].stops}
           vuelta={routeDetails.Return[0].stops}
           idaAddress={routeDetails.Going[0].address}
@@ -242,6 +243,15 @@ export default async function Page({ params }) {
           longName={routeDetails.long_name}
           shortName={routeDetails.short_name}
           type={routeDetails.route_type}
+        /> */}
+        <LeafletMap
+          stops_ida={routeDetails.Going[0].stops}
+          address_ida={routeDetails.Going[0].address}
+          stops_vuelta={routeDetails.Return[0].stops}
+          address_vuelta={routeDetails.Return[0].address}
+          long_name={routeDetails.long_name}
+          short_name={routeDetails.short_name}
+          route_type={routeDetails.route_type}
         />
       </>
     );
