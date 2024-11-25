@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useCallback } from 'react';
+import { useState } from "react";
 import { useRouter } from "next/navigation";  
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 
 export default function Login() {
@@ -13,74 +13,16 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const handleLoginOffline = useCallback(() => {
-    const savedEmail = localStorage.getItem('email');
-    const savedPassword = localStorage.getItem('password');
-    const savedAuth = localStorage.getItem('isAuthenticated') === 'true';
-
-    console.log("Credenciales desde localStorage:", {
-      savedEmail,
-      savedPassword,
-      savedAuth,
-    });
-
-    if (savedEmail && savedPassword) {
-      if (savedEmail === email && savedPassword === password) {
-        localStorage.setItem('isAuthenticated', 'true');
-        console.log("Logeado exitosamente offline");
-        window.location.reload();
-        router.push("/"); 
-      } else {
-        setError("Credenciales incorrectas.");
-      }
-    } else {
-      setError("No se encontraron credenciales guardadas.");
-    }
-  }, [email, password, router]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push("/");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [router]);
-
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    if (!navigator.onLine) {
-      handleLoginOffline();
-      return;
-    }
-
     try {
-      await setPersistence(auth, browserLocalPersistence);
-
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-      localStorage.setItem('isAuthenticated', 'true');
-
-      console.log(localStorage.getItem('email'));
-      console.log(localStorage.getItem('password'));
-      console.log(localStorage.getItem('isAuthenticated'));
-
-      window.location.reload();
+      await signInWithEmailAndPassword(auth, email, password);
       router.push("/");
-
-      console.log("Logeado exitosamente online");
     } catch (error) {
       setError("Error al iniciar sesión: " + error.message);
     }
   };
-
-
 
   return (
     <>
@@ -107,7 +49,7 @@ export default function Login() {
                 name="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value.trim())}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6BC5E8] sm:text-sm"
                 placeholder="Tu correo electrónico"
@@ -121,7 +63,7 @@ export default function Login() {
                 name="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value.trim())}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#6BC5E8] sm:text-sm"
                 placeholder="Tu contraseña"

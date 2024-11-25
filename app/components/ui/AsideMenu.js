@@ -8,42 +8,23 @@ import { useRouter } from 'next/navigation';
 export default function AsideMenu() {
     const [user, setUser] = useState(null);
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const checkAuthStatus = () => {
-        const authStatus = localStorage.getItem("isAuthenticated") === "true";
-        setIsAuthenticated(authStatus);
-      };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
-      useEffect(() => {
-        checkAuthStatus();
-    
-        const handleStorageChange = () => checkAuthStatus();
-        window.addEventListener("storage", handleStorageChange);
-    
-        return () => window.removeEventListener("storage", handleStorageChange);
-      }, []);
+    return () => unsubscribe();
+  }, []);
 
-      const handleLogout = async () => {
-        try {
-          if (navigator.onLine) {
-            await signOut(auth);
-            console.log("Sesión cerrada online");
-          } else {
-            console.log("Eliminando datos de localStorage porque el usuario está offline.");
-            localStorage.removeItem("isAuthenticated");
-            localStorage.removeItem("email");
-            localStorage.removeItem("password");
-        }
-        
-        localStorage.setItem("isAuthenticated", "false");
-    
-          router.push("/");
-          window.location.reload();
-        } catch (error) {
-          console.error("Error al cerrar sesión:", error);
-        }
-      };
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/');
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
 return (
 <aside id="logo-sidebar"
@@ -102,7 +83,7 @@ return (
                 </a>
             </li>
             <li>
-            {isAuthenticated ? (
+            {user ? (
                 <button onClick={handleLogout} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 w-full text-left">
                 <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M14 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2v-2" />
