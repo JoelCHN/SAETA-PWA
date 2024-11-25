@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/ui/Footer";
+import AgencyData from "../data/city_routes/AgencyData";
 
 export default async function Address() {
   try {
@@ -47,21 +48,19 @@ export default async function Address() {
           <form className="flex flex-col justify-center gap-2 md:flex-row md:justify-between mb-4">
             <select
               id="countries"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-1/4 p-2.5"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-1/4 p-2.5"
             >
-              <option selected>Seleccione la agencia</option>
-              <option value="arvit">ARVIT</option>
-              <option value="utpcam">UTPCAM</option>
-              <option value="vicosertra">VICOSERTRA</option>
-              <option value="utucc">UTUCC</option>
-              <option value="setratab">SETRATAB</option>
-              <option value="genesisxxi">GENESIS XXI</option>
-              <option value="lineadorada">LINEA DORADA</option>
+              <option defaultValue={true}>Seleccione la agencia</option>
+              {AgencyData.map((agency) => (
+                <option key={agency.id} value={agency.value}>
+                  {agency.label}
+                </option>
+              ))}
             </select>
-            <div class="relative w-full md:w-1/4">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <div className="relative w-full md:w-1/4">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
-                  class="w-4 h-4 text-gray-500"
+                  className="w-4 h-4 text-gray-500"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -69,9 +68,9 @@ export default async function Address() {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
@@ -79,12 +78,12 @@ export default async function Address() {
               <input
                 type="search"
                 id="default-search"
-                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Numero, Ruta ..."
               />
               <button
                 type="submit"
-                class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+                className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
               >
                 Search
               </button>
