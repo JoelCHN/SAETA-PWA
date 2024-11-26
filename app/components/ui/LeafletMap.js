@@ -64,12 +64,11 @@ export function LeafletMap({
 
   return (
     <section className="shadow">
-      <div className="flex flex-col md:flex-row p-2 items-center justify-center md:justify-between w-full h-32 md:h-10 bg-black">
-        <span className="text-white font-semibold md:text-balance text-sm md:ms-4 text-center md:text-left mb-2 md:mb-0">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-auto bg-black">
+        <span className="text-white font-semibold md:text-balance text-sm md:ms-4 h-auto text-center md:text-left my-2">
           Ruta {route_type} {short_name}: {long_name}
         </span>
-        <div className="flex flex-wrap gap-2 md:me-4 items-center justify-center">
-          {/* Checkbox para la ruta de ida */}
+        <div className="flex flex-wrap gap-2 my-2 md:me-4 items-center justify-center">
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
@@ -79,11 +78,10 @@ export function LeafletMap({
             />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ms-3 text-sm font-medium text-white">
-              Mostrar ruta de ida (<i className="text-xs">{address_ida}</i>)
+              Mostrar ida (<i className="text-xs">{address_ida}</i>)
             </span>
           </label>
 
-          {/* Checkbox para la ruta de vuelta */}
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
@@ -93,8 +91,7 @@ export function LeafletMap({
             />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             <span className="ms-3 text-sm font-medium text-white">
-              Mostrar ruta de vuelta (
-              <i className="text-xs">{address_vuelta}</i>)
+              Mostrar vuelta (<i className="text-xs">{address_vuelta}</i>)
             </span>
           </label>
         </div>

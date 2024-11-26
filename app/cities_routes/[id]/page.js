@@ -142,10 +142,10 @@ export default async function Page({ params }) {
               </thead>
             </table>
             <article className="flex flex-row justify-between">
-              <div className="w-full px-3 mx-auto">
+              <div className="w-full mx-auto">
                 {routeDetails.Going[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2 p-1">
-                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
+                  <div key={index} className="">
+                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between py-4 md:px-4">
                       <div className="flex-shrink-0">
                         <svg
                           className="h-8 w-8 p-1 bg-blue-900 text-white rounded-full"
@@ -171,26 +171,27 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
+                      <div className="flex-1 min-w-0 md:ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-xs text-gray-500 truncate">
                           {stop.road}
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900">
+                      <div className="text-sm inline-flex items-center font-semibold text-gray-900">
                         {stop.is_terminal ? "Terminal" : "Parada"}
                       </div>
                     </div>
+                    <div className="w-auto border border-gray-100"></div>
                   </div>
                 ))}
               </div>
-              <div className="h-auto border-2 border-gray-300"></div>
-              <div className="w-full px-3 mx-auto">
+              <div className="h-auto border border-gray-100"></div>
+              <div className="w-full mx-auto">
                 {routeDetails.Return[0].stops.map((stop, index) => (
-                  <div key={index} className="mb-2">
-                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between">
+                  <div key={index} className="">
+                    <div className="flex flex-col md:flex-row items-center text-center justify-center md:justify-between py-4 md:px-4">
                       <div className="flex-shrink-0">
                         <svg
                           className="h-8 w-8 p-1 bg-red-900 text-white rounded-full"
@@ -216,18 +217,19 @@ export default async function Page({ params }) {
                           <path d="M5 9v11" />
                         </svg>
                       </div>
-                      <div className="flex-1 min-w-0 ms-4">
+                      <div className="flex-1 min-w-0 md:ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate">
                           {stop.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate">
+                        <p className="text-xs text-gray-500 truncate">
                           {stop.road}
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900">
+                      <div className="text-sm inline-flex items-center font-semibold text-gray-900">
                         {stop.is_terminal ? "Terminal" : "Parada"}
                       </div>
                     </div>
+                    <div className="w-auto border border-gray-100"></div>
                   </div>
                 ))}
               </div>
