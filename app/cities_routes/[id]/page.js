@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { LeafletMap } from "../../components/ui/LeafletMap.js";
+import ComentCard from "../../components/ui/ComentCard";
 
 export default async function Page({ params }) {
   try {
@@ -245,6 +246,24 @@ export default async function Page({ params }) {
           short_name={routeDetails.short_name}
           route_type={routeDetails.route_type}
         />
+        <section className="container mx-auto mt-4 p-4 shadow">
+          <h2 className="text-2xl font-bold mb-4">Comentarios</h2>
+          <div className="flex flex-col max-h-80 overflow-y-scroll space-y-4 mb-4 p-4">
+            <ComentCard />
+          </div>
+          <div className="bg-white p-4 m-4 rounded-lg shadow">
+            <textarea
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Escribe tu comentario"
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Publicar
+            </button>
+          </div>
+        </section>
       </>
     );
   } catch (error) {
