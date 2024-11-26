@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LeafletMap } from "../../components/ui/LeafletMap.js";
-import ComentCard from "../../components/ui/ComentCard";
+import ComentCard from "../../components/ui/ComentSection.js";
 
 export default async function Page({ params }) {
   try {
@@ -247,9 +247,7 @@ export default async function Page({ params }) {
           route_type={routeDetails.route_type}
         />
 
-          
-          <ComentCard routeId={id} />
-        
+        <ComentCard routeId={id} />
       </>
     );
   } catch (error) {

@@ -1,6 +1,7 @@
 import PlacesData from "../../data/placesdata/PlacesData";
 import { Carrusel } from "../../components/ui/Carrusel";
 import { LeafletMapSolo } from "../../components/ui/LeafletMapSolo";
+import ComentCard from "../../components/ui/ComentSection";
 
 export default async function Details({ params }) {
   const id = (await params).id;
@@ -89,6 +90,7 @@ export default async function Details({ params }) {
           />
         </div>
       </section>
+      <ComentCard placeId={id} />
     </>
   );
 }
