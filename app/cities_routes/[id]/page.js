@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LeafletMap } from "../../components/ui/LeafletMap.js";
-import ComentCard from "../../components/ui/ComentCard";
+import ComentCard from "../../components/ui/ComentSection.js";
 
 export default async function Page({ params }) {
   try {
@@ -52,9 +52,9 @@ export default async function Page({ params }) {
               </a>
             </li>
             <li aria-current="page">
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
-                  class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                  className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -62,13 +62,13 @@ export default async function Page({ params }) {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 9 4-4-4-4"
                   />
                 </svg>
-                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2">
+                <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2">
                   Detalles
                 </span>
               </div>
@@ -156,10 +156,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -202,10 +201,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -246,24 +244,8 @@ export default async function Page({ params }) {
           short_name={routeDetails.short_name}
           route_type={routeDetails.route_type}
         />
-        <section className="container mx-auto mt-4 p-4 shadow">
-          <h2 className="text-2xl font-bold mb-4">Comentarios</h2>
-          <div className="flex flex-col max-h-80 overflow-y-scroll space-y-4 mb-4 p-4">
-            <ComentCard />
-          </div>
-          <div className="bg-white p-4 m-4 rounded-lg shadow">
-            <textarea
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Escribe tu comentario"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Publicar
-            </button>
-          </div>
-        </section>
+
+        <ComentCard routeId={id} />
       </>
     );
   } catch (error) {

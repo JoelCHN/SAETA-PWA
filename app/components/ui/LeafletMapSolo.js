@@ -25,7 +25,7 @@ export function LeafletMapSolo({
         center={place_position}
         zoom={20}
         scrollWheelZoom={false}
-        className="w-full h-[500px]"
+        className="w-full h-[500px] -z-0"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
