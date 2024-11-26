@@ -63,8 +63,8 @@ export function LeafletMap({
   });
 
   return (
-    <section className="shadow">
-      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-auto bg-black">
+    <section className="shadow rounded-md">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between w-full h-auto bg-black rounded-t-md">
         <span className="text-white font-semibold md:text-balance text-sm md:ms-4 h-auto text-center md:text-left my-2">
           Ruta {route_type} {short_name}: {long_name}
         </span>
@@ -101,7 +101,7 @@ export function LeafletMap({
         center={vhsPosition}
         zoom={14}
         scrollWheelZoom={false}
-        className="w-full h-[500px] -z-0"
+        className="w-full h-[500px] rounded-b-md -z-0"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

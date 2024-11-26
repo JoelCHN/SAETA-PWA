@@ -52,9 +52,9 @@ export default async function Page({ params }) {
               </a>
             </li>
             <li aria-current="page">
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
-                  class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                  className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -62,13 +62,13 @@ export default async function Page({ params }) {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 9 4-4-4-4"
                   />
                 </svg>
-                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2">
+                <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2">
                   Detalles
                 </span>
               </div>
@@ -156,10 +156,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -202,10 +201,9 @@ export default async function Page({ params }) {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-bus-stop"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
