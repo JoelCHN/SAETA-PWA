@@ -5,7 +5,7 @@ export default function CardComments({ userName, datePosted, comment }) {
         <footer className="flex justify-between items-center mb-2">
           <div className="flex items-center">
             <p className="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-              <picture className="w-6 h-6 aspect-square rounded-full bg-blue-600">
+              <picture className="w-6 h-6 aspect-square rounded-full bg-blue-600 me-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

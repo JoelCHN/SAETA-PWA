@@ -3,42 +3,41 @@
 import { useState, useEffect } from "react";
 import CardComments from "./CardComments";
 
-export default function ComentCard({ routeId, placeId }) {
+export default function ComentSection({ routeId, placeId }) {
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
+  const [loadingFetch, setLoadingFetch] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/data/Comments/Comments.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const route = data.find((r) => r.routeId === routeId);
-        setComments(route ? route.comments : []);
-      });
-  }, [routeId]);
-
-  const handleAddComment = async () => {
-    if (newComment.trim()) {
-      const commentData = { routeId, comment: newComment };
+    const fetchComments = async () => {
       try {
-        const response = await fetch("/api/comments", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(commentData),
-        });
+        setLoadingFetch(true);
+        let endpoint = "";
 
-        if (response.ok) {
-          const newComments = [
-            ...comments,
-            { ...commentData, id: Date.now(), date: new Date().toISOString() },
-          ];
-          setComments(newComments);
-          setNewComment("");
+        if (routeId) {
+          endpoint = `https://saeta-node-api.onrender.com/api/comments/routes/${routeId}`;
+        } else if (placeId) {
+          endpoint = `https://saeta-node-api.onrender.com/api/comments/places/${placeId}`;
+        } else {
+          throw new Error("No routeId or placeId provided.");
         }
-      } catch (error) {
-        console.error("Error al agregar el comentario:", error);
+
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+          throw new Error(`Error fetching comments: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setComments(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoadingFetch(false);
       }
-    }
-  };
+    };
+
+    fetchComments();
+  }, [routeId, placeId]);
 
   return (
     <section className="bg-white py-8 lg:py-16 antialiased">
@@ -51,7 +50,7 @@ export default function ComentCard({ routeId, placeId }) {
 
         <div className="mb-6">
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-            <label for="comment" className="sr-only">
+            <label htmlFor="comment" className="sr-only">
               Your comment
             </label>
             <textarea
@@ -60,23 +59,26 @@ export default function ComentCard({ routeId, placeId }) {
               className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
               placeholder="Escribe tu comentario..."
               required
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
             ></textarea>
           </div>
           <button
             type="button"
-            onClick={handleAddComment}
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none disabled:opacity-50"
           >
             Comentar
           </button>
         </div>
-        {comments.length > 0 ? (
+
+        {loadingFetch ? (
+          <p>Cargando comentarios...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : comments.length > 0 ? (
           comments.map((comment, index) => (
             <CardComments
               key={index}
-              comment={comment.comment}
+              userName={comment.user_name}
+              comment={comment.message}
               datePosted={comment.date}
             />
           ))
