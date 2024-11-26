@@ -101,7 +101,7 @@ export function LeafletMap({
         center={vhsPosition}
         zoom={14}
         scrollWheelZoom={false}
-        className="w-full h-[500px]"
+        className="w-full h-[500px] -z-0"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -132,7 +132,9 @@ export function LeafletMap({
             ))}
             <Polyline pathOptions={purpleOptions} positions={ida_route}>
               <Tooltip sticky>
-                <span className="text-sm italic font-bold">{address_ida}</span>
+                <span className="text-sm italic font-bold">
+                  Ruta {address_ida}
+                </span>
               </Tooltip>
             </Polyline>
           </>
@@ -163,7 +165,7 @@ export function LeafletMap({
             <Polyline pathOptions={redOptions} positions={vuelta_route}>
               <Tooltip sticky>
                 <span className="text-sm italic font-bold">
-                  {address_vuelta}
+                  Ruta {address_vuelta}
                 </span>
               </Tooltip>
             </Polyline>
